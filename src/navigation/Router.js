@@ -7,7 +7,6 @@ import RestaurantScreen from '../screens/RestaurantScreen';
 
 
 
-
 const Stack = createNativeStackNavigator();
 
 

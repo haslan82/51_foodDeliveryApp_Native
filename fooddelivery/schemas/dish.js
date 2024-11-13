@@ -25,7 +25,7 @@ export default defineType({
     },
     {
       name: 'price',
-      title: 'price of the dish',
+      title: 'price of the dish USD',
       type: 'number',
       validation: (rule) => rule.required(),
     },

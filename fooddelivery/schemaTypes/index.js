@@ -1,22 +1,6 @@
-import blockContent from './blockContent'
-import crewMember from './crewMember'
-import castMember from './castMember'
-import movie from './movie'
-import person from './person'
-import screening from './screening'
-import plotSummary from './plotSummary'
-import plotSummaries from './plotSummaries'
+import category from '../schemas/category'
+import dish from '../schemas/dish'
+import featured from '../schemas/featured'
+import restaurant from '../schemas/restaurant'
 
-export const schemaTypes = [
-  // Document types
-  movie,
-  person,
-  screening,
-
-  // Other types
-  blockContent,
-  plotSummary,
-  plotSummaries,
-  castMember,
-  crewMember,
-]
+export const schemaTypes = [category, dish, restaurant, featured]

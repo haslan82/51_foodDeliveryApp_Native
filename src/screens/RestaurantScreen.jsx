@@ -13,14 +13,25 @@ import { themeColors } from "../utils/Theme";
 import DishRow from "../components/DishRow";
 import CartIcon from "../components/CartIcon";
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setRestaurant } from "../slices/restaurantSlice";
 
 const RestaurantScreen = () => {
   const navigation = useNavigation();
-
+const dispatch = useDispatch();
   const { params } = useRoute();
   let item = params;
-  console.log("restaurant:", item);
+ /*  console.log("restaurant:", item); */
+  useEffect(()=>{
+if(item && item._id){
+  dispatch(setRestaurant({...item}));
+}
+  },[])
+
+
   return (
+    
     <View >
       <CartIcon />
       <StatusBar style="light"/>
@@ -74,6 +85,7 @@ className='bg-white -mt-12 pt-6'
       </View>
 
       </ScrollView>
+      
     </View>
   );
 };

@@ -2,9 +2,17 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { themeColors } from '../utils/Theme'
 import { useNavigation } from '@react-navigation/native'
+import { useSelector } from 'react-redux'
+import { selectCartItems, selectCartTotal } from '../slices/cartSlice'
 
 const CartIcon = () => {
     const navigation= useNavigation();
+    const cartItems = useSelector(selectCartItems);
+    const cartTotal = useSelector(selectCartTotal);
+
+
+
+    if (!cartItems.length) return;
   return (
     <View className='absolute bottom-5 w-full z-50'>
        <TouchableOpacity
@@ -14,7 +22,7 @@ const CartIcon = () => {
       >
         <View className="p-2 px-4 rounded-full bg-white/30">
           <Text className="text-white text-lg font-extrabold">
-           4
+           {cartItems.length}
           </Text>
         </View>
 
@@ -22,7 +30,7 @@ const CartIcon = () => {
           View Cart
         </Text>
         <Text className="text-white text-lg  text-center font-extrabold">
-          $ {28}
+          $ {cartTotal}
         </Text>
       </TouchableOpacity>
     </View>

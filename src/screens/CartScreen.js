@@ -12,7 +12,11 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { selectRestaurant } from "../slices/restaurantSlice";
 import { useEffect, useState } from "react";
-import { removeFromCart, selectCartItems, selectCartTotal } from "../slices/cartSlice";
+import {
+  removeFromCart,
+  selectCartItems,
+  selectCartTotal,
+} from "../slices/cartSlice";
 
 const CartScreen = () => {
   const restaurant = useSelector(selectRestaurant);
@@ -21,7 +25,7 @@ const CartScreen = () => {
   const cartTotal = useSelector(selectCartTotal);
   const [groupedItems, setGroupedItems] = useState({});
 
-
+  const deliveryFee = 2;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,10 +36,9 @@ const CartScreen = () => {
         group[item.id] = [item];
       }
       return group;
-    }, {});
+    }, []);
     setGroupedItems(items);
-  }, [cartItems, cartTotal]);
-
+  }, [cartItems]);
 
   return (
     <View className="bg-white flex-1">
@@ -45,7 +48,7 @@ const CartScreen = () => {
           style={{ backgroundColor: themeColors.bgColor(1) }}
           className="absolute z-10 rounded-full p-1 shadow top-5 left-2"
         >
-          <Icon.ArrowLeft strokeWidth={3} stroke="white" />
+          <Icon.ArrowLeft strokeWidth={3} stroke={"white"} />
         </TouchableOpacity>
         <View>
           <Text className="text-center font-bold text-xl">Your Cart</Text>
@@ -74,7 +77,7 @@ const CartScreen = () => {
         }}
         className="bg-white pt-5"
       >
-        {Object.entries(groupedItems).map(([key,items]) => {
+        {Object.entries(groupedItems).map(([key, items]) => {
           let dish = items[0];
           return (
             <View
@@ -87,13 +90,19 @@ const CartScreen = () => {
               <Image
                 className="h-14 w-14 rounded-full ml-3 mr-3"
                 source={dish.image}
+
+                /* source={
+                  dish.image
+                    ? dish.image
+                    : require("../assets/images/bikeGuy.png")
+                } */
               />
               <Text className="flex-1 font-bold text-gray-700">
                 {dish.name}{" "}
               </Text>
               <Text className="font-semibold text-base">$ {dish.price} </Text>
               <TouchableOpacity
-              onPress={()=>dispatch(removeFromCart({id:dish.id}))}
+                onPress={() => dispatch(removeFromCart({ id: dish.id }))}
                 className="p-1 rounded-full"
                 style={{ backgroundColor: themeColors.bgColor(1) }}
               >

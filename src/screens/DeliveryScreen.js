@@ -1,6 +1,6 @@
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+ import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { themeColors } from '../utils/Theme';
 import * as Icon from "react-native-feather";
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,10 +21,11 @@ const DeliveryScreen = () => {
   return (
 
 
-    <SafeAreaView>
+
       
-    <View className="flex-1">
-      <MapView
+    <View style={styles.container} >
+     {/*  <MapView
+      provider={PROVIDER_GOOGLE}
         initialRegion={{
           latitude: 39.9208,
           longitude: 32.8541,
@@ -33,8 +34,22 @@ const DeliveryScreen = () => {
         }}
         className="flex-1"
         mapType="standart"
+      > */}
+
+<MapView
+        provider={PROVIDER_GOOGLE} // Google Maps sağlamak için
+        initialRegion={{
+          latitude: 39.9208,
+          longitude: 32.8541,
+          latitudeDelta: 0.0099,
+          longitudeDelta: 0.0099,
+        }}
+        style={{ flex: 1 }}
+        mapType="standard" // Bunu "standard" yerine "hybrid", "satellite", veya "terrain" yapmayı deneyin.
       >
-        <Marker
+
+
+         <Marker
           coordinate={{
             latitude: 39.9208,
             longitude: 32.8541,
@@ -42,11 +57,11 @@ const DeliveryScreen = () => {
           title={restaurant?.name}
           description={restaurant?.description}
           pinColor={themeColors.bgColor(1)}
-        />
+        /> 
       </MapView>
 
 
-        <View className="rounded-t-3xl -mt-12 bg-white relative ">
+         <View className="rounded-t-3xl -mt-12 bg-white relative ">
         <TouchableOpacity className="absolute right-4 top-2"></TouchableOpacity>
         <View className="flex-row justify-between px-5 pt-10">
           <View>
@@ -104,14 +119,19 @@ const DeliveryScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </View> 
 
     </View>
     
-    </SafeAreaView>
+
   )
 }
 
 export default DeliveryScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+  
+  }
+}) 

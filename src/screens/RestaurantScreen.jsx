@@ -21,8 +21,10 @@ const RestaurantScreen = () => {
   const navigation = useNavigation();
 const dispatch = useDispatch();
   const { params } = useRoute();
-  let item = params;
+  const item = params;
  /*  console.log("restaurant:", item); */
+
+ 
   useEffect(()=>{
 if(item && item._id){
   dispatch(setRestaurant({...item}));
